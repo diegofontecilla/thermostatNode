@@ -1,9 +1,16 @@
-var FizzBuzz = function() {};
+function FizzBuzz() {
+}
 
-FizzBuzz.prototype.isDivisibleByThree = function (number) {
-  if (number % 3 === 0) {
+FizzBuzz.prototype.play = function(number) {
+  if (this._isDivisibleBy(3, number)) {
     return 'Fizz';
+  } else if (this._isDivisibleBy(5, number)) {
+    return 'Buzz';
   } else {
-    return null;
+    return number;
   }
+};
+
+FizzBuzz.prototype._isDivisibleBy = function(divisor, number) {
+  return number % divisor === 0;
 };

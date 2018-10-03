@@ -6,16 +6,19 @@ describe("FizzBuzz", function() {
     fizzBuzz = new FizzBuzz();
   });
 
+  describe('multiples of 3', function(){
+    it("fizzes for 3", function() {
+      expect(fizzBuzz.play(3)).toEqual('Fizz');
+    });
 
-  describe('knows when a number is', function(){
-
-    it("divisible by 3", function() {
-      expect(fizzBuzz.isDivisibleByThree(6)).toBe('Fizz');
+    it('fizzes for 6', function() {
+      expect(fizzBuzz.play(6)).toEqual('Fizz');
     });
   });
 
-  // describe('knows when a number is NOT', function() {
-  //
-  //   it()
-  // });
+  describe('multiples of 5', function() {
+    it('buzzes for 5', function() {
+      expect(fizzBuzz.play(5)).toEqual('Buzz')
+    });
+  });
 });
