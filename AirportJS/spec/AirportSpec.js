@@ -23,4 +23,10 @@ describe('Airport', function() {
     airport.clearForTakeOff(plane);
     expect(airport.planes()).toEqual([]);
   });
+
+  it('confirm take off with a message', function(){
+    airport.clearForLanding(plane);
+    airport.clearForTakeOff(plane);
+    expect(airport.takeOffConfirmationMessage()).toEqual('The plane has taken off');
+  });
 });

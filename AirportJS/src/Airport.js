@@ -14,4 +14,7 @@ Airport.prototype.clearForLanding = function(plane){
 
 Airport.prototype.clearForTakeOff = function(plane){
   this._hangar.splice( this._hangar.indexOf(plane), 1);
+  this.takeOffConfirmationMessage = function(){
+    return 'The plane has taken off';
+  };
 };
