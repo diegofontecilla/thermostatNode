@@ -15,7 +15,14 @@ describe('Feature test:', function() {
   });
 
   it('planes can be instrcuted for take off from an airport', function(){
+    plane.land(airport);
     plane.takeOff(airport);
     expect(airport.planes()).not.toContain(plane);
   });
+
+  // it('airport send confirmation message after plane takes off', function(){
+  //   plane.land(airport);
+  //   plane.takeOff(airport);
+  //   expect(airport.takeOffConfirmationMessage()).toHaveBeenCalled();
+  // });
 });
