@@ -3,10 +3,12 @@
 describe('Plane', function() {
   var plane;
   var airport;
+  var weather;
 
   beforeEach(function() {
       plane = new Plane();
       airport = jasmine.createSpyObj('airport', ['clearForLanding', 'clearForTakeOff', 'takeOffConfirmationMessage']);
+      weather = jasmine.createSpyObj('weather', ['isStormy']);
   });
 
   it('can land at an airport', function() {
@@ -20,10 +22,19 @@ describe('Plane', function() {
     expect(airport.clearForTakeOff).toHaveBeenCalled();
   });
 
-  // describe('Under stormy conditions', function(){
-  //   it('landing is denied', function(){
-  //     spyOn(airport, 'isStormy').and.returnValue(true);
-  //     expect(function() { plane.land(airport) }).toThrowError('Take off not allow due to stormy weather');
-  //   });
-  // });
+  describe('Under stormy conditions', function(){
+
+    it('landing is denied', function(){
+      weather.isStormy.and.returnValue(true)
+      plane.land(airport);
+      expect(this._location).not.toEqual(airport);
+    });
+
+    it('take off is denied', function(){
+      weather.isStormy.and.returnValues(false, true);
+      plane.land(airport);
+      plane.takeOff();
+      expect(plane._location).toEqual(airport);
+    });
+  });
 });

@@ -49,11 +49,13 @@ describe('Under good weather', function(){
     });
 
     it('does not allow take off', function(){
-      expect(function() { airport.clearForTakeOff(plane) }).toThrowError('Take off not allowed due to stormy weather');
+      var message = 'Take off not allowed due to stormy weather'
+      expect(function() { airport.clearForTakeOff(plane) }).toThrowError(message);
     });
 
     it('does not allow landing', function(){
-      expect(function() { airport.clearForLanding(plane) }).toThrowError('Landing not allowed due to stormy weather')
+      var message = 'Landing not allowed due to stormy weather'
+      expect(function() { airport.clearForLanding(plane) }).toThrowError(message)
     });
   });
 });

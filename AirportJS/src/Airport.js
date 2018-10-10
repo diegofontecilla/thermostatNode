@@ -20,10 +20,8 @@ Airport.prototype.clearForTakeOff = function(plane){
   if(this._weather.isStormy()){
     throw new Error('Take off not allowed due to stormy weather');
   }
-  else {
   this._hangar.splice( this._hangar.indexOf(plane), 1);
   this.takeOffConfirmationMessage();
-  }
 };
 
 Airport.prototype.takeOffConfirmationMessage = function () {
