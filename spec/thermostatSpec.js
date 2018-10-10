@@ -11,7 +11,8 @@ describe('Thermostat', function(){
     expect(thermostat.getCurrentTemperature()).toEqual(20);
   });
 
-  it('temperature can be increased', function(){
-
-});
+  it('increase in temperature with up()', function(){
+    thermostat.up();
+    expect(thermostat.getCurrentTemperature()).toEqual(21);
+  });
 });
