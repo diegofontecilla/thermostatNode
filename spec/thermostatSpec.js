@@ -21,14 +21,6 @@ describe('Thermostat', function(){
     expect(thermostat.getCurrentTemperature()).toEqual(19);
   });
 
-  it('when PSM is off maximum temperature limit is 32', function(){
-    thermostat.switchPowerSavingModeOff();
-    for (var i = 1; i < 19; i++) {
-      thermostat.up();
-    }
-    expect(thermostat.getCurrentTemperature()).toEqual(32);
-  });
-
   it('minimum temperature limit is 10 degrees', function(){
     for (var i = 1; i < 12; i++) {
       thermostat.down();
@@ -44,20 +36,13 @@ describe('Thermostat', function(){
     expect(thermostat.isMaximumTemperature()).toBe(false)
   });
 
-  it('has power saving mode on by default', function(){
-    expect(thermostat.isPowerSavingModeOn()).toBe(true);
-  });
-
-  it('can switch PSM off', function(){
+  it('has reset button', function(){
     thermostat.switchPowerSavingModeOff();
-    expect(thermostat.isPowerSavingModeOn()).toBe(false);
-  });
-
-  it('can switch PSM on when is off', function(){
-    thermostat.switchPowerSavingModeOff();
-    expect(thermostat.isPowerSavingModeOn()).toBe(false);
-    thermostat.switchPowerSavingModeOn();
-    expect(thermostat.isPowerSavingModeOn()).toBe(true);
+    for(var i = 0; i < 12; i++) {
+      thermostat.up();
+    }
+    thermostat.resetButton();
+    expect(thermostat.getCurrentTemperature()).toEqual(20);
   });
 
   describe('when PSM is on', function(){
@@ -66,6 +51,32 @@ describe('Thermostat', function(){
         thermostat.up();
       }
       expect(thermostat.getCurrentTemperature()).toEqual(25);
+    });
+
+    it('can switch PSM off', function(){
+      thermostat.switchPowerSavingModeOff();
+      expect(thermostat.isPowerSavingModeOn()).toBe(false);
+    });
+
+    it('has power saving mode on by default', function(){
+      expect(thermostat.isPowerSavingModeOn()).toBe(true);
+    });
+  });
+
+  describe('when PSM is off', function(){
+    it('maximum temperature limit is 32', function(){
+      thermostat.switchPowerSavingModeOff();
+      for (var i = 0; i < 13; i++) {
+        thermostat.up();
+      }
+      expect(thermostat.getCurrentTemperature()).toEqual(32);
+    });
+
+    it('can switch PSM on when is off', function(){
+      thermostat.switchPowerSavingModeOff();
+      expect(thermostat.isPowerSavingModeOn()).toBe(false);
+      thermostat.switchPowerSavingModeOn();
+      expect(thermostat.isPowerSavingModeOn()).toBe(true);
     });
   });
 });
