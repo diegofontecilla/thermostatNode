@@ -79,21 +79,23 @@ describe('Thermostat', function(){
     });
   });
 
-  it('when temperature is under 18 tells you that is in low usage', function(){
-    for(var i = 0; i < 3; i++) {
-      thermostat.down();
-    }
-    expect(thermostat.getUsage()).toEqual('low-usage');
-  });
+describe('display usage level', function(){
+    it('when temperature is under 18 tells you that is in low usage', function(){
+      for(var i = 0; i < 3; i++) {
+        thermostat.down();
+      }
+      expect(thermostat.energyUsage()).toEqual('low-usage');
+    });
 
-  it('when temperature is under 25 tells you that is in medium usage', function(){
-    expect(thermostat.getUsage()).toEqual('medium-usage');
-  });
+    it('when temperature is under 25 tells you that is in medium usage', function(){
+      expect(thermostat.energyUsage()).toEqual('medium-usage');
+    });
 
-  it('when temperature is at and over 25 tells you that is in high usage', function(){
-    for(var i = 0; i < 5; i++) {
-      thermostat.up();
-    }
-    expect(thermostat.getUsage()).toEqual('high-usage');
+    it('when temperature is at and over 25 tells you that is in high usage', function(){
+      for(var i = 0; i < 5; i++) {
+        thermostat.up();
+      }
+      expect(thermostat.energyUsage()).toEqual('high-usage');
+    });
   });
 });
