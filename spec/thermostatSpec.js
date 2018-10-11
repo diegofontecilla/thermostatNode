@@ -36,12 +36,11 @@ describe('Thermostat', function(){
     expect(thermostat.isMaximumTemperature()).toBe(false)
   });
 
-  it('has reset button', function(){
-    thermostat.switchPowerSavingModeOff();
-    for(var i = 0; i < 12; i++) {
+  it('has reset button that reset to default temperature', function(){
+    for(var i = 0; i < 4; i++) {
       thermostat.up();
     }
-    thermostat.resetButton();
+    thermostat.resetTemperature();
     expect(thermostat.getCurrentTemperature()).toEqual(20);
   });
 
@@ -78,5 +77,23 @@ describe('Thermostat', function(){
       thermostat.switchPowerSavingModeOn();
       expect(thermostat.isPowerSavingModeOn()).toBe(true);
     });
+  });
+
+  it('when temperature is under 18 tells you that is in low usage', function(){
+    for(var i = 0; i < 3; i++) {
+      thermostat.down();
+    }
+    expect(thermostat.getUsage()).toEqual('low-usage');
+  });
+
+  it('when temperature is under 25 tells you that is in medium usage', function(){
+    expect(thermostat.getUsage()).toEqual('medium-usage');
+  });
+
+  it('when temperature is at and over 25 tells you that is in high usage', function(){
+    for(var i = 0; i < 5; i++) {
+      thermostat.up();
+    }
+    expect(thermostat.getUsage()).toEqual('high-usage');
   });
 });
