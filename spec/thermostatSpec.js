@@ -21,7 +21,8 @@ describe('Thermostat', function(){
     expect(thermostat.getCurrentTemperature()).toEqual(19);
   });
 
-  it('maximum temperature limit is 32 degrees', function(){
+  it('when PSM is off maximum temperature limit is 32', function(){
+    thermostat.switchPowerSavingModeOff();
     for (var i = 1; i < 19; i++) {
       thermostat.up();
     }
@@ -41,5 +42,30 @@ describe('Thermostat', function(){
 
   it('checks if temperature is set to maximum temperature', function(){
     expect(thermostat.isMaximumTemperature()).toBe(false)
+  });
+
+  it('has power saving mode on by default', function(){
+    expect(thermostat.isPowerSavingModeOn()).toBe(true);
+  });
+
+  it('can switch PSM off', function(){
+    thermostat.switchPowerSavingModeOff();
+    expect(thermostat.isPowerSavingModeOn()).toBe(false);
+  });
+
+  it('can switch PSM on when is off', function(){
+    thermostat.switchPowerSavingModeOff();
+    expect(thermostat.isPowerSavingModeOn()).toBe(false);
+    thermostat.switchPowerSavingModeOn();
+    expect(thermostat.isPowerSavingModeOn()).toBe(true);
+  });
+
+  describe('when PSM is on', function(){
+    it('25 is maximum temperature limit', function(){
+      for(var i = 1; i < 7; i++) {
+        thermostat.up();
+      }
+      expect(thermostat.getCurrentTemperature()).toEqual(25);
+    });
   });
 });
