@@ -7,7 +7,11 @@
   <body>
     <style src="style.css"></style>
     <section>
-      <h1 id="temperature"></h1>
+      <h1>Current temperature: <span id="current-temperature">20</span></h1>
+      <form id="select-city">
+        <input id="current-city" type="text" placeholder="Enter a city"></input>
+        <input type="submit"></input>
+      </form>
       <p>
         <button id="temperature-up">+</button>
         <button id="temperature-down">-</button>
