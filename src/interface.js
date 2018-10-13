@@ -2,30 +2,30 @@ $(document).ready(function(){
   var thermostat = new Thermostat();
   updateTemperature();
 
-  $('#temp-up').click(function(){
-    thermostat.increaseTemperature();
+  $('#temperature-up').click(function(){
+    thermostat.up();
     updateTemperature();
   });
 
-  $('#temp-down').click(function(){
-    thermostat.decreaseTemperature();
+  $('#temperature-down').click(function(){
+    thermostat.down();
     updateTemperature();
   });
 
-  $('#temp-reset').click(function(){
-    thermostat.reset();
+  $('#temperature-reset').click(function(){
+    thermostat.resetTemperature();
     updateTemperature();
   });
 
-  $('#psm-on').click(function(){
-    thermostat.powerSavingModeOn();
-    $('#power-saving').text('on')
+  $('#powersaving-on').click(function(){
+    thermostat.switchPowerSavingModeOn();
+    $('#power-saving-status').text('on')
     updateTemperature();
   });
 
-  $('#psm-off').click(function(){
-    thermostat.powerSavingModeOff();
-    $('#power-saving').text('off')
+  $('#powersaving-off').click(function(){
+    thermostat.switchPowerSavingModeOff();
+    $('#power-saving-status').text('off')
     updateTemperature();
   });
 
@@ -38,21 +38,16 @@ $(document).ready(function(){
     })
   };
 
+  displayWeather('London');
+
   $('#select-city').submit(function(event) {
     event.preventDefault();
     var city = $('#current-city').val();
     displayWeather(city);
-    $.get('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=d46acf81288f25a5981e588e1be618ee&units=metric', function(data) {
-      $('#current-temperature').text(data.main.temp);
-    })
-  })
-
-  $.get('http://api.openweathermap.org/data/2.5/weather?q=London&appid=d46acf81288f25a5981e588e1be618ee&units=metric', function(data) {
-  $('#current-temperature').text(data.main.temp);
   })
 
   function updateTemperature(){
-    $('#temperature').text(thermostat.temperature);
-    $('#temperature').attr('class', thermostat.energyUsage());
+    $('#current-temperature').text(thermostat.temperature);
+    $('#current-temperature').attr('class', thermostat.energyUsage());
   };
 });

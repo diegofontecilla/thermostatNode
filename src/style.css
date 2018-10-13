@@ -9,3 +9,12 @@
 .high-usage {
   color: red;
 }
+
+body {
+    background-color: lightblue;
+}
+
+h1 {
+  text-transform: uppercase;
+  color: red;
+}
