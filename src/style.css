@@ -11,10 +11,18 @@
 }
 
 body {
-    background-color: lightblue;
+    background-image: url("https://ichef.bbci.co.uk/images/ic/976xn/p06kz4wp.jpg");
+    background-size: 1500px;
+    width: 40000px;
+    height: 200px;
 }
 
 h1 {
-  text-transform: uppercase;
+  font-family: "Courier New", Courier;
   color: red;
+}
+
+h3 {
+  font-family: "Courier New", Courier;
+  color: black;
 }
