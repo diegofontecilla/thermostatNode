@@ -34,6 +34,7 @@ $(document).ready(function(){
     var token = '&appid=d46acf81288f25a5981e588e1be618ee';
     var units = '&units=metric';
     $.get(url + token + units, function(data) {
+      $('#city').text(city);
       $('#current-temperature').text(data.main.temp);
     })
   };
@@ -47,7 +48,7 @@ $(document).ready(function(){
   })
 
   function updateTemperature(){
-    $('#current-temperature').text(thermostat.temperature);
-    $('#current-temperature').attr('class', thermostat.energyUsage());
+    $('#thermostat-at').text(thermostat.temperature);
+    $('#thermostat-at').attr('class', thermostat.energyUsage());
   };
 });
