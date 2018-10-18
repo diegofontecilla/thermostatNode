@@ -1,6 +1,17 @@
 $(document).ready(function(){
-  var thermostat = new Thermostat();
-  updateTemperature();
+
+  var thermostat;
+  $.get('/data', function(res) {
+    var data = JSON.parse(res);
+
+    var temperature = parseInt(data['temperature']);
+    var powerSavingMode = (data['powerSavingMode'] == 'true');
+
+    thermostat = new Thermostat(powerSavingMode, temperature);
+
+    updateTemperature();
+    updatePSM();
+  });
 
   $('#temperature-up').click(function(){
     thermostat.up();
@@ -19,23 +30,22 @@ $(document).ready(function(){
 
   $('#powersaving-on').click(function(){
     thermostat.switchPowerSavingModeOn();
-    $('#power-saving-status').text('on')
+    updatePSM();
     updateTemperature();
   });
 
   $('#powersaving-off').click(function(){
     thermostat.switchPowerSavingModeOff();
-    $('#power-saving-status').text('off')
+    updatePSM();
     updateTemperature();
   });
 
   function displayWeather(city) {
-    var url = 'http://api.openweathermap.org/data/2.5/weather?q=' + city;
-    var token = '&appid=d46acf81288f25a5981e588e1be618ee';
-    var units = '&units=metric';
-    $.get(url + token + units, function(data) {
+    var url = 'http://api.openweathermap.org/data/2.5/weather'
+    var params = { q: city, appid: 'd46acf81288f25a5981e588e1be618ee', units: 'metric' }
+    $.get(url, params, function(response) {
       $('#city').text(city);
-      $('#current-temperature').text(data.main.temp);
+      $('#current-temperature').text(response.main.temp);
     })
   };
 
@@ -47,7 +57,13 @@ $(document).ready(function(){
     displayWeather(city);
   })
 
+  function updatePSM() {
+    var psm = (thermostat.powerSavingMode ? 'on' : 'off')
+    $('#power-saving-status').text(psm)
+  }
+
   function updateTemperature(){
+    $.post('/data', {temperature: thermostat.temperature, powerSavingMode: thermostat.powerSavingMode})
     $('#thermostat-at').text(thermostat.temperature);
     $('#thermostat-at').attr('class', thermostat.energyUsage());
   };

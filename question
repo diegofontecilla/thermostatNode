@@ -1,10 +1,7 @@
--on index.html, line 18, needs to be
-<script src="js/thermostat.js"></script>
-
-or
-
-<script src="src/thermostat.js"></script>
-
 -understand how to download the js file from jquery.com
 
--understand last refactoring on APIs walk through 
+-when there is a request from the browser, the request goes
+first to the controller (interface.js) or to the index.html?
+
+-what's the server in my front end app? (before, when i didn't have
+a restfull api server)
