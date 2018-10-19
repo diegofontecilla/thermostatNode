@@ -5,6 +5,7 @@ function Thermostat(powerSavingMode, temperature){
   this.MAX_LIMIT_PSM_ON = 25;
   this.MAX_LIMIT_PSM_OFF = 32;
   this.MEDIUM_ENERGY_USAGE_LIMIT = 18;
+  this.DEFAULT_TEMPERATURE = 20;
   this.powerSavingMode = powerSavingMode;
   this.temperature = temperature;
 };

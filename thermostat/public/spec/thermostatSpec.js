@@ -2,9 +2,13 @@
 
 describe('Thermostat', function(){
   var thermostat;
+  // var powerSavingMode;
+  // var temperature;
 
   beforeEach(function(){
-    thermostat = new Thermostat();
+    // powerSavingMode = spyOnProperty(true, 'powerSavingMode');
+    // temperature = spyOnProperty(20, 'temperature')
+    thermostat = new Thermostat(true, 20);
   });
 
   it('Starts at 20 degrees by default', function(){

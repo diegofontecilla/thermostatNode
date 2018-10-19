@@ -63,8 +63,8 @@ $(document).ready(function(){
   }
 
   function updateTemperature(){
-    $.post('/data', {temperature: thermostat.temperature, powerSavingMode: thermostat.powerSavingMode})
     $('#thermostat-at').text(thermostat.temperature);
     $('#thermostat-at').attr('class', thermostat.energyUsage());
+    $.post('/data', {temperature: thermostat.temperature, powerSavingMode: thermostat.powerSavingMode})
   };
 });
