@@ -5,3 +5,6 @@ first to the controller (interface.js) or to the index.html?
 
 -what's the server in my front end app? (before, when i didn't have
 a restfull api server)
+
+-on thermostatSpec.js: on the new Thermostat, the parameters would
+need to be doubles or not?

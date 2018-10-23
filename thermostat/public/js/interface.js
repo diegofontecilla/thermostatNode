@@ -1,14 +1,11 @@
 $(document).ready(function(){
-
   var thermostat;
+
   $.get('/data', function(res) {
     var data = JSON.parse(res);
-
     var temperature = parseInt(data['temperature']);
     var powerSavingMode = (data['powerSavingMode'] == 'true');
-
     thermostat = new Thermostat(powerSavingMode, temperature);
-
     updateTemperature();
     updatePSM();
   });

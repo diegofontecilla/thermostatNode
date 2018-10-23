@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'json'
+require_relative 'thermostat_state'
 
 class Controller < Sinatra::Base
   enable :sessions
@@ -9,14 +10,14 @@ class Controller < Sinatra::Base
   end
 
   post '/data' do
-    session[:temperature] = request.params['temperature']
-    session[:power_saving_mode] = request.params['powerSavingMode']
+    Thermostat.temp = params['temperature']
+    Thermostat.psm = params['powerSavingMode']
   end
 
   get '/data' do
     {
-      temperature: session.fetch(:temperature) { '20' },
-      powerSavingMode: session.fetch(:power_saving_mode) { 'true' }
+      temperature: Thermostat.temp,
+      powerSavingMode: Thermostat.psm
     }.to_json
   end
 
