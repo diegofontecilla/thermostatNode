@@ -1,6 +1,6 @@
 require 'sinatra'
 require 'json'
-require_relative 'thermostat_state'
+require_relative 'thermostat'
 
 class Controller < Sinatra::Base
   enable :sessions
